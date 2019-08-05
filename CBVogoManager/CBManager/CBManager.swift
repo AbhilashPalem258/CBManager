@@ -8,77 +8,121 @@
 
 import UIKit
 import CoreBluetooth
+import RxSwift
+import RxCocoa
 
 protocol CBManagementProtocol {
-    func discoverAdvertisedDevices()
+    func toggleBluetoothOnOffState()
+    func connectToPheripheral(deviceIndex: Int, completionHandler: @escaping (_ status: Bool) -> ())
 }
 
 class CBManager: NSObject {
     static let shared = CBManager.init()
     
     var bleDevices: [CBPeripheral] = []
+    let segments = BehaviorRelay<[PeripheralModel]>(value: [])
     
     fileprivate var centralManager: CBCentralManager?
+    var connectionCompletionHandler: ((_ status: Bool) -> ())?
+    weak var vc: UIViewController?
+    
+    var isScanning: Bool {
+        return centralManager!.isScanning
+    }
     
     private override init() {
+        super.init()
         let centralQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.centralQueueName", attributes: .concurrent)
-        centralManager =  CBCentralManager.init(delegate: self, queue: centralQueue)
+        centralManager =  CBCentralManager.init(delegate: self, queue: nil)
     }
 }
 extension CBManager: CBManagementProtocol {
-    func discoverAdvertisedDevices() {
+    func toggleBluetoothOnOffState() {
+        guard let manager = centralManager else {
+            return
+        }
         
+        if manager.isScanning {
+            segments.accept([])
+            centralManager?.stopScan()
+        }
+        else{
+            centralManager?.scanForPeripherals(withServices: nil, options: nil)
+        }
+    }
+    
+    func connectToPheripheral(deviceIndex: Int, completionHandler: @escaping (_ status: Bool) -> ()) {
+         connectionCompletionHandler = completionHandler
+         centralManager?.connect(segments.value[deviceIndex].peripheral, options: nil)
     }
 }
 extension CBManager: CBCentralManagerDelegate {
+    
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        if let block = connectionCompletionHandler { block(false) }
+        UIAlertController.displayAlert(message: nil, title: "didFailToConnect", inViewController: vc)
+    }
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        
+        var statusMsg: String!
         switch central.state {
-            
         case .unknown:
-            print("Bluetooth status is UNKNOWN")
+            statusMsg = "Bluetooth status is UNKNOWN"
         case .resetting:
-            print("Bluetooth status is RESETTING")
+            statusMsg = "Bluetooth status is RESETTING"
         case .unsupported:
-            print("Bluetooth status is UNSUPPORTED")
+            statusMsg = "Bluetooth status is UNSUPPORTED"
         case .unauthorized:
-            print("Bluetooth status is UNAUTHORIZED")
+            statusMsg = "Bluetooth status is UNAUTHORIZED"
         case .poweredOff:
-            print("Bluetooth status is POWERED OFF")
+            statusMsg = "Bluetooth status is POWERED OFF"
         case .poweredOn:
-            print("Bluetooth status is POWERED ON")
-            
-            DispatchQueue.main.async { () -> Void in
-               
-            }
-           centralManager?.scanForPeripherals(withServices: nil, options: nil)
+            statusMsg = "Bluetooth status is POWERED ON"
+        }
+        
+        DispatchQueue.main.async {[unowned self]  in
+            UIAlertController.displayAlert(message: nil, title: statusMsg, inViewController: self.vc)
         }
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         
-        print(peripheral.name!)
-        bleDevices.append(peripheral)
-        decodePeripheralState(peripheralState: peripheral.state)
-//        centralManager?.stopScan()
+        let peripheralObj = PeripheralModel.init(peripheral: peripheral, rssiVal: RSSI, advertisementData: advertisementData)
         
-        // STEP 6: connect to the discovered peripheral of interest
-//        centralManager?.connect(peripheralHeartRateMonitor!)
+        var devices = segments.value
+        devices.append(peripheralObj)
+        segments.accept(devices)
         
-    } // END func centralManager(... didDiscover peripheral
+    }
+    
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        if let block = connectionCompletionHandler { block(true) }
+        UIAlertController.displayAlert(message: nil, title: "Connection Successful", inViewController: vc)
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        UIAlertController.displayAlert(message: nil, title: "didDisconnect", inViewController: vc)
+    }
+    
+}
+extension CBManager: CBPeripheralDelegate {
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
+        UIAlertController.displayAlert(message: nil, title: "didDiscoverServices", inViewController: vc)
+    }
     
 }
 extension CBManager {
-    func decodePeripheralState(peripheralState: CBPeripheralState) {
+    func decodePeripheralState(peripheralState: CBPeripheralState) -> String {
         switch peripheralState {
         case .disconnected:
-            print("Peripheral state: disconnected")
+            return "Disconnected"
         case .connected:
-            print("Peripheral state: connected")
+            return "Connected"
         case .connecting:
-            print("Peripheral state: connecting")
+            return "Connecting"
         case .disconnecting:
-            print("Peripheral state: disconnecting")
+            return "Disconnecting"
         }
     }
 }

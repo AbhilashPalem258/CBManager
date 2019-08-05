@@ -6,6 +6,7 @@ target 'CBVogoManager' do
   use_frameworks!
 
   # Pods for CBVogoManager
+  pod 'GradientCircularProgress', :git => 'https://github.com/keygx/GradientCircularProgress'
   pod 'RxSwift', '~> 4.5.0'
   pod 'RxCocoa', '~> 4.5.0'
 end

@@ -3,31 +3,59 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		9A3624D968D5E1ACC1B16AE2 /* Pods_CBVogoManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71306F4BAD482B4F8338F69F /* Pods_CBVogoManager.framework */; };
+		D51B337422F8A85D006CB9BB /* RUICardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337322F8A85D006CB9BB /* RUICardView.swift */; };
+		D51B337622F8A909006CB9BB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337522F8A909006CB9BB /* Colors.swift */; };
+		D51B337922F8AA13006CB9BB /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337822F8AA13006CB9BB /* ColorConstants.swift */; };
+		D51B337B22F8B2B2006CB9BB /* LoaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337A22F8B2B2006CB9BB /* LoaderManager.swift */; };
+		D51B337D22F8B312006CB9BB /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337C22F8B312006CB9BB /* AppConstants.swift */; };
+		D51B338122F8B480006CB9BB /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337F22F8B480006CB9BB /* LoaderView.swift */; };
+		D51B338222F8B480006CB9BB /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D51B338022F8B480006CB9BB /* LoaderView.xib */; };
+		D51B338422F8B530006CB9BB /* RUICustomNIbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B338322F8B530006CB9BB /* RUICustomNIbView.swift */; };
+		D51B338622F8B5CD006CB9BB /* RUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B338522F8B5CD006CB9BB /* RUILabel.swift */; };
+		D545680C22F87437004033D4 /* PeripheralModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680B22F87437004033D4 /* PeripheralModel.swift */; };
+		D545680E22F89857004033D4 /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680D22F89856004033D4 /* PeripheralViewController.swift */; };
+		D545681022F89A10004033D4 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680F22F89A10004033D4 /* extensions.swift */; };
 		D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54C22F834D1001370CE /* AppDelegate.swift */; };
-		D5D6C54F22F834D1001370CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54E22F834D1001370CE /* ViewController.swift */; };
+		D5D6C54F22F834D1001370CE /* BLEDevicesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54E22F834D1001370CE /* BLEDevicesVC.swift */; };
 		D5D6C55222F834D1001370CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C55022F834D1001370CE /* Main.storyboard */; };
 		D5D6C55422F834D4001370CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C55322F834D4001370CE /* Assets.xcassets */; };
 		D5D6C55722F834D4001370CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C55522F834D4001370CE /* LaunchScreen.storyboard */; };
 		D5D6C56022F8357B001370CE /* CBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C55F22F8357B001370CE /* CBManager.swift */; };
+		D5D6C56522F8400F001370CE /* PheripheralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C56322F8400F001370CE /* PheripheralTableViewCell.swift */; };
+		D5D6C56622F8400F001370CE /* PheripheralTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C56422F8400F001370CE /* PheripheralTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6B9BAE1C1BF38DAA42914AD6 /* Pods-CBVogoManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBVogoManager.debug.xcconfig"; path = "Target Support Files/Pods-CBVogoManager/Pods-CBVogoManager.debug.xcconfig"; sourceTree = "<group>"; };
 		71306F4BAD482B4F8338F69F /* Pods_CBVogoManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CBVogoManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8216959F9C17FBE8208D56CF /* Pods-CBVogoManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBVogoManager.release.xcconfig"; path = "Target Support Files/Pods-CBVogoManager/Pods-CBVogoManager.release.xcconfig"; sourceTree = "<group>"; };
+		D51B337322F8A85D006CB9BB /* RUICardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUICardView.swift; sourceTree = "<group>"; };
+		D51B337522F8A909006CB9BB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		D51B337822F8AA13006CB9BB /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
+		D51B337A22F8B2B2006CB9BB /* LoaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderManager.swift; sourceTree = "<group>"; };
+		D51B337C22F8B312006CB9BB /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		D51B337F22F8B480006CB9BB /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
+		D51B338022F8B480006CB9BB /* LoaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
+		D51B338322F8B530006CB9BB /* RUICustomNIbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RUICustomNIbView.swift; sourceTree = "<group>"; };
+		D51B338522F8B5CD006CB9BB /* RUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUILabel.swift; sourceTree = "<group>"; };
+		D545680B22F87437004033D4 /* PeripheralModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralModel.swift; sourceTree = "<group>"; };
+		D545680D22F89856004033D4 /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
+		D545680F22F89A10004033D4 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		D5D6C54922F834D1001370CE /* CBVogoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBVogoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5D6C54C22F834D1001370CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D5D6C54E22F834D1001370CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D5D6C54E22F834D1001370CE /* BLEDevicesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDevicesVC.swift; sourceTree = "<group>"; };
 		D5D6C55122F834D1001370CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D5D6C55322F834D4001370CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5D6C55622F834D4001370CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5D6C55822F834D4001370CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5D6C55F22F8357B001370CE /* CBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBManager.swift; sourceTree = "<group>"; };
+		D5D6C56322F8400F001370CE /* PheripheralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PheripheralTableViewCell.swift; sourceTree = "<group>"; };
+		D5D6C56422F8400F001370CE /* PheripheralTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PheripheralTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +76,34 @@
 				71306F4BAD482B4F8338F69F /* Pods_CBVogoManager.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D51B337222F8A838006CB9BB /* RUIElements */ = {
+			isa = PBXGroup;
+			children = (
+				D51B338322F8B530006CB9BB /* RUICustomNIbView.swift */,
+				D51B337322F8A85D006CB9BB /* RUICardView.swift */,
+				D51B338522F8B5CD006CB9BB /* RUILabel.swift */,
+			);
+			path = RUIElements;
+			sourceTree = "<group>";
+		};
+		D51B337722F8AA00006CB9BB /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				D51B337822F8AA13006CB9BB /* ColorConstants.swift */,
+				D51B337C22F8B312006CB9BB /* AppConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		D51B337E22F8B44F006CB9BB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D51B337F22F8B480006CB9BB /* LoaderView.swift */,
+				D51B338022F8B480006CB9BB /* LoaderView.xib */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D5D6C54022F834D1001370CE = {
@@ -71,9 +127,13 @@
 		D5D6C54B22F834D1001370CE /* CBVogoManager */ = {
 			isa = PBXGroup;
 			children = (
+				D51B337E22F8B44F006CB9BB /* Components */,
+				D51B337722F8AA00006CB9BB /* Constants */,
+				D51B337222F8A838006CB9BB /* RUIElements */,
+				D5D6C56722F84804001370CE /* Utilities */,
+				D5D6C56122F83F63001370CE /* ViewControllers */,
 				D5D6C55E22F8355C001370CE /* CBManager */,
 				D5D6C54C22F834D1001370CE /* AppDelegate.swift */,
-				D5D6C54E22F834D1001370CE /* ViewController.swift */,
 				D5D6C55022F834D1001370CE /* Main.storyboard */,
 				D5D6C55322F834D4001370CE /* Assets.xcassets */,
 				D5D6C55522F834D4001370CE /* LaunchScreen.storyboard */,
@@ -86,8 +146,38 @@
 			isa = PBXGroup;
 			children = (
 				D5D6C55F22F8357B001370CE /* CBManager.swift */,
+				D545680B22F87437004033D4 /* PeripheralModel.swift */,
 			);
 			path = CBManager;
+			sourceTree = "<group>";
+		};
+		D5D6C56122F83F63001370CE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				D5D6C56222F83FE9001370CE /* cells */,
+				D5D6C54E22F834D1001370CE /* BLEDevicesVC.swift */,
+				D545680D22F89856004033D4 /* PeripheralViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		D5D6C56222F83FE9001370CE /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				D5D6C56322F8400F001370CE /* PheripheralTableViewCell.swift */,
+				D5D6C56422F8400F001370CE /* PheripheralTableViewCell.xib */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		D5D6C56722F84804001370CE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D545680F22F89A10004033D4 /* extensions.swift */,
+				D51B337522F8A909006CB9BB /* Colors.swift */,
+				D51B337A22F8B2B2006CB9BB /* LoaderManager.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		FBDBD098C8D44A2693C637AB /* Pods */ = {
@@ -96,7 +186,6 @@
 				6B9BAE1C1BF38DAA42914AD6 /* Pods-CBVogoManager.debug.xcconfig */,
 				8216959F9C17FBE8208D56CF /* Pods-CBVogoManager.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -160,7 +249,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D6C56622F8400F001370CE /* PheripheralTableViewCell.xib in Resources */,
 				D5D6C55722F834D4001370CE /* LaunchScreen.storyboard in Resources */,
+				D51B338222F8B480006CB9BB /* LoaderView.xib in Resources */,
 				D5D6C55422F834D4001370CE /* Assets.xcassets in Resources */,
 				D5D6C55222F834D1001370CE /* Main.storyboard in Resources */,
 			);
@@ -215,9 +306,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D6C56522F8400F001370CE /* PheripheralTableViewCell.swift in Sources */,
+				D51B337622F8A909006CB9BB /* Colors.swift in Sources */,
+				D51B337422F8A85D006CB9BB /* RUICardView.swift in Sources */,
+				D51B337922F8AA13006CB9BB /* ColorConstants.swift in Sources */,
+				D51B337B22F8B2B2006CB9BB /* LoaderManager.swift in Sources */,
 				D5D6C56022F8357B001370CE /* CBManager.swift in Sources */,
-				D5D6C54F22F834D1001370CE /* ViewController.swift in Sources */,
+				D545681022F89A10004033D4 /* extensions.swift in Sources */,
+				D51B337D22F8B312006CB9BB /* AppConstants.swift in Sources */,
+				D5D6C54F22F834D1001370CE /* BLEDevicesVC.swift in Sources */,
 				D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */,
+				D545680E22F89857004033D4 /* PeripheralViewController.swift in Sources */,
+				D545680C22F87437004033D4 /* PeripheralModel.swift in Sources */,
+				D51B338422F8B530006CB9BB /* RUICustomNIbView.swift in Sources */,
+				D51B338622F8B5CD006CB9BB /* RUILabel.swift in Sources */,
+				D51B338122F8B480006CB9BB /* LoaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,14 +467,17 @@
 			baseConfigurationReference = 6B9BAE1C1BF38DAA42914AD6 /* Pods-CBVogoManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FY7LB4LG7Y;
 				INFOPLIST_FILE = CBVogoManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.abhi.CBVogoManager;
+				PRODUCT_BUNDLE_IDENTIFIER = com.abhi.CBManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -382,14 +488,17 @@
 			baseConfigurationReference = 8216959F9C17FBE8208D56CF /* Pods-CBVogoManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FY7LB4LG7Y;
 				INFOPLIST_FILE = CBVogoManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.abhi.CBVogoManager;
+				PRODUCT_BUNDLE_IDENTIFIER = com.abhi.CBManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
