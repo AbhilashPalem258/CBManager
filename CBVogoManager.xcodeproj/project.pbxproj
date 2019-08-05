@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A3624D968D5E1ACC1B16AE2 /* Pods_CBVogoManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71306F4BAD482B4F8338F69F /* Pods_CBVogoManager.framework */; };
 		D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54C22F834D1001370CE /* AppDelegate.swift */; };
 		D5D6C54F22F834D1001370CE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54E22F834D1001370CE /* ViewController.swift */; };
 		D5D6C55222F834D1001370CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C55022F834D1001370CE /* Main.storyboard */; };
 		D5D6C55422F834D4001370CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C55322F834D4001370CE /* Assets.xcassets */; };
 		D5D6C55722F834D4001370CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C55522F834D4001370CE /* LaunchScreen.storyboard */; };
+		D5D6C56022F8357B001370CE /* CBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C55F22F8357B001370CE /* CBManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B9BAE1C1BF38DAA42914AD6 /* Pods-CBVogoManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBVogoManager.debug.xcconfig"; path = "Target Support Files/Pods-CBVogoManager/Pods-CBVogoManager.debug.xcconfig"; sourceTree = "<group>"; };
+		71306F4BAD482B4F8338F69F /* Pods_CBVogoManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CBVogoManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8216959F9C17FBE8208D56CF /* Pods-CBVogoManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CBVogoManager.release.xcconfig"; path = "Target Support Files/Pods-CBVogoManager/Pods-CBVogoManager.release.xcconfig"; sourceTree = "<group>"; };
 		D5D6C54922F834D1001370CE /* CBVogoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBVogoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5D6C54C22F834D1001370CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5D6C54E22F834D1001370CE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +27,7 @@
 		D5D6C55322F834D4001370CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D5D6C55622F834D4001370CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D5D6C55822F834D4001370CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5D6C55F22F8357B001370CE /* CBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CBManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +35,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9A3624D968D5E1ACC1B16AE2 /* Pods_CBVogoManager.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B7C3C0D412886663A352EC6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				71306F4BAD482B4F8338F69F /* Pods_CBVogoManager.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D5D6C54022F834D1001370CE = {
 			isa = PBXGroup;
 			children = (
 				D5D6C54B22F834D1001370CE /* CBVogoManager */,
 				D5D6C54A22F834D1001370CE /* Products */,
+				FBDBD098C8D44A2693C637AB /* Pods */,
+				2B7C3C0D412886663A352EC6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,6 +71,7 @@
 		D5D6C54B22F834D1001370CE /* CBVogoManager */ = {
 			isa = PBXGroup;
 			children = (
+				D5D6C55E22F8355C001370CE /* CBManager */,
 				D5D6C54C22F834D1001370CE /* AppDelegate.swift */,
 				D5D6C54E22F834D1001370CE /* ViewController.swift */,
 				D5D6C55022F834D1001370CE /* Main.storyboard */,
@@ -64,6 +82,24 @@
 			path = CBVogoManager;
 			sourceTree = "<group>";
 		};
+		D5D6C55E22F8355C001370CE /* CBManager */ = {
+			isa = PBXGroup;
+			children = (
+				D5D6C55F22F8357B001370CE /* CBManager.swift */,
+			);
+			path = CBManager;
+			sourceTree = "<group>";
+		};
+		FBDBD098C8D44A2693C637AB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6B9BAE1C1BF38DAA42914AD6 /* Pods-CBVogoManager.debug.xcconfig */,
+				8216959F9C17FBE8208D56CF /* Pods-CBVogoManager.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +107,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5D6C55B22F834D5001370CE /* Build configuration list for PBXNativeTarget "CBVogoManager" */;
 			buildPhases = (
+				2070E60EDDEAAF34E1BAB5AE /* [CP] Check Pods Manifest.lock */,
 				D5D6C54522F834D1001370CE /* Sources */,
 				D5D6C54622F834D1001370CE /* Frameworks */,
 				D5D6C54722F834D1001370CE /* Resources */,
+				2A005D4E150F1DB5165AAA57 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -130,11 +168,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2070E60EDDEAAF34E1BAB5AE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CBVogoManager-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2A005D4E150F1DB5165AAA57 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CBVogoManager/Pods-CBVogoManager-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CBVogoManager/Pods-CBVogoManager-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CBVogoManager/Pods-CBVogoManager-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D5D6C54522F834D1001370CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5D6C56022F8357B001370CE /* CBManager.swift in Sources */,
 				D5D6C54F22F834D1001370CE /* ViewController.swift in Sources */,
 				D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */,
 			);
@@ -280,6 +361,7 @@
 		};
 		D5D6C55C22F834D5001370CE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B9BAE1C1BF38DAA42914AD6 /* Pods-CBVogoManager.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -297,6 +379,7 @@
 		};
 		D5D6C55D22F834D5001370CE /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8216959F9C17FBE8208D56CF /* Pods-CBVogoManager.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
