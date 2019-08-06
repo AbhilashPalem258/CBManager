@@ -19,13 +19,15 @@ protocol CBManagementProtocol {
 class CBManager: NSObject {
     static let shared = CBManager.init()
     
-    var bleDevices: [CBPeripheral] = []
-    let segments = BehaviorRelay<[PeripheralModel]>(value: [])
+    let peripherals = BehaviorRelay<[PeripheralModel]>(value: [])
     
     fileprivate var centralManager: CBCentralManager?
     var connectionCompletionHandler: ((_ status: Bool) -> ())?
     weak var vc: UIViewController?
     
+    let onDataWritten: PublishSubject<(isWriteSuccessful: Bool, characteristic: CBCharacteristic, error: Error?)> = PublishSubject.init()
+    let onReadData: PublishSubject<(isReadSuccessful: Bool, characteristic: CBCharacteristic, readText: String?)> = PublishSubject.init()
+
     var isScanning: Bool {
         return centralManager!.isScanning
     }
@@ -43,7 +45,7 @@ extension CBManager: CBManagementProtocol {
         }
         
         if manager.isScanning {
-            segments.accept([])
+            peripherals.accept([])
             centralManager?.stopScan()
         }
         else{
@@ -53,7 +55,7 @@ extension CBManager: CBManagementProtocol {
     
     func connectToPheripheral(deviceIndex: Int, completionHandler: @escaping (_ status: Bool) -> ()) {
          connectionCompletionHandler = completionHandler
-         centralManager?.connect(segments.value[deviceIndex].peripheral, options: nil)
+         centralManager?.connect(peripherals.value[deviceIndex].peripheral, options: nil)
     }
 }
 extension CBManager: CBCentralManagerDelegate {
@@ -89,15 +91,19 @@ extension CBManager: CBCentralManagerDelegate {
         
         let peripheralObj = PeripheralModel.init(peripheral: peripheral, rssiVal: RSSI, advertisementData: advertisementData)
         
-        var devices = segments.value
+        var devices = peripherals.value
         devices.append(peripheralObj)
-        segments.accept(devices)
+        peripherals.accept(devices)
         
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         if let block = connectionCompletionHandler { block(true) }
-        UIAlertController.displayAlert(message: nil, title: "Connection Successful", inViewController: vc)
+        let connectedPeripheralmodel = peripherals.value.filter { (model) -> Bool in
+            return model.peripheral.identifier.uuidString == peripheral.identifier.uuidString
+        }.first
+        peripheral.discoverServices(connectedPeripheralmodel!.advertisementData["kCBAdvDataServiceUUIDs"] as? [CBUUID])
+        peripheral.delegate = self
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -108,7 +114,27 @@ extension CBManager: CBCentralManagerDelegate {
 extension CBManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        UIAlertController.displayAlert(message: nil, title: "didDiscoverServices", inViewController: vc)
+        UIAlertController.displayAlert(message: nil, title: "did discovered service", inViewController: vc)
+        for service in peripheral.services! {
+            peripheral.discoverCharacteristics(nil, for: service)
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        print("Characteristics discovered.")
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
+        if(characteristic.value != nil) {
+            let stringValue = String(data: characteristic.value!, encoding: String.Encoding.utf8)
+            let isSuceessful = (error == nil)
+            onReadData.onNext((isReadSuccessful: isSuceessful, characteristic: characteristic, readText: stringValue))
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        let isSuceessful = (error == nil)
+        onDataWritten.onNext((isWriteSuccessful: isSuceessful, characteristic: characteristic, error: error))
     }
     
 }
@@ -124,5 +150,24 @@ extension CBManager {
         case .disconnecting:
             return "Disconnecting"
         }
+    }
+    
+    func sendDataToPeripheralWithIndex(data: Data?, peripheralIndex: Int?, characteristic: CBCharacteristic?) {
+        
+        guard let index = peripheralIndex, let dataToSend = data, let mainCharacteristic = characteristic  else {
+            return
+        }
+        
+        let peripheral = peripherals.value[index].peripheral
+        peripheral.writeValue(dataToSend, for: mainCharacteristic, type: CBCharacteristicWriteType.withResponse)
+    }
+    
+    func readDataFromPerpheralWithIndex(peripheralIndex: Int?, characteristic: CBCharacteristic?) {
+        guard let index = peripheralIndex, let mainCharacteristic = characteristic  else {
+            return
+        }
+        
+        let peripheral = peripherals.value[index].peripheral
+        peripheral.readValue(for: mainCharacteristic)
     }
 }

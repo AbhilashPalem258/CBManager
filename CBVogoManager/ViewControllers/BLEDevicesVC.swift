@@ -15,6 +15,7 @@ class BLEDevicesVC: UIViewController {
    @IBOutlet weak var bleDevicesTableView: UITableView!
     
    fileprivate let bag = DisposeBag()
+   fileprivate let CBManagerInstance = CBManager.shared
    let peripheralVc = UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: PeripheralViewController.self)) as? PeripheralViewController
     
    lazy var activityIndicator: UIActivityIndicatorView = {
@@ -49,9 +50,9 @@ class BLEDevicesVC: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.bleDevicesTableView.register(UINib.init(nibName: String(describing: PheripheralTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: PheripheralTableViewCell.self))
 
-        CBManager.shared.vc = self
+        CBManagerInstance.vc = self
         bleDevicesTableView.tableFooterView = UIView.init()
-        CBManager.shared.segments
+        CBManagerInstance.segments
             .bind(to: bleDevicesTableView.rx.items) { (tableView, row, element) in
                 let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PheripheralTableViewCell.self), for: IndexPath(row: row, section: 0)) as! PheripheralTableViewCell
                 cell.nameLabel.text = element.peripheral.name ?? "Unnamed Service"
@@ -73,7 +74,7 @@ class BLEDevicesVC: UIViewController {
             
         }).disposed(by: bag)
         
-        CBManager.shared.segments.asObservable().subscribe(onNext: {[unowned self] (devices) in
+        CBManagerInstance.segments.asObservable().subscribe(onNext: {[unowned self] (devices) in
             self.bleDevicesTableView.backgroundView =  (devices.count == 0) ? self.noPeripheralsMsgLabel : UIView.init()
             self.bleDevicesTableView.separatorStyle = (devices.count == 0) ? .none : .singleLine
         })
@@ -81,6 +82,11 @@ class BLEDevicesVC: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: scanSwitch)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: activityIndicator)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 }
 extension BLEDevicesVC {

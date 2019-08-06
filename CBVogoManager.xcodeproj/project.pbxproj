@@ -20,6 +20,9 @@
 		D545680C22F87437004033D4 /* PeripheralModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680B22F87437004033D4 /* PeripheralModel.swift */; };
 		D545680E22F89857004033D4 /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680D22F89856004033D4 /* PeripheralViewController.swift */; };
 		D545681022F89A10004033D4 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680F22F89A10004033D4 /* extensions.swift */; };
+		D5BD34C222F9939E003CB1B1 /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34C122F9939E003CB1B1 /* ServicesTableViewController.swift */; };
+		D5BD34C422F99734003CB1B1 /* CharcteristicsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34C322F99734003CB1B1 /* CharcteristicsTableViewController.swift */; };
+		D5BD34C622F99F4C003CB1B1 /* CharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34C522F99F4C003CB1B1 /* CharacteristicViewController.swift */; };
 		D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54C22F834D1001370CE /* AppDelegate.swift */; };
 		D5D6C54F22F834D1001370CE /* BLEDevicesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54E22F834D1001370CE /* BLEDevicesVC.swift */; };
 		D5D6C55222F834D1001370CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C55022F834D1001370CE /* Main.storyboard */; };
@@ -46,6 +49,9 @@
 		D545680B22F87437004033D4 /* PeripheralModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralModel.swift; sourceTree = "<group>"; };
 		D545680D22F89856004033D4 /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
 		D545680F22F89A10004033D4 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		D5BD34C122F9939E003CB1B1 /* ServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesTableViewController.swift; sourceTree = "<group>"; };
+		D5BD34C322F99734003CB1B1 /* CharcteristicsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharcteristicsTableViewController.swift; sourceTree = "<group>"; };
+		D5BD34C522F99F4C003CB1B1 /* CharacteristicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
 		D5D6C54922F834D1001370CE /* CBVogoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBVogoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5D6C54C22F834D1001370CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5D6C54E22F834D1001370CE /* BLEDevicesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDevicesVC.swift; sourceTree = "<group>"; };
@@ -157,6 +163,9 @@
 				D5D6C56222F83FE9001370CE /* cells */,
 				D5D6C54E22F834D1001370CE /* BLEDevicesVC.swift */,
 				D545680D22F89856004033D4 /* PeripheralViewController.swift */,
+				D5BD34C122F9939E003CB1B1 /* ServicesTableViewController.swift */,
+				D5BD34C322F99734003CB1B1 /* CharcteristicsTableViewController.swift */,
+				D5BD34C522F99F4C003CB1B1 /* CharacteristicViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -311,9 +320,12 @@
 				D51B337422F8A85D006CB9BB /* RUICardView.swift in Sources */,
 				D51B337922F8AA13006CB9BB /* ColorConstants.swift in Sources */,
 				D51B337B22F8B2B2006CB9BB /* LoaderManager.swift in Sources */,
+				D5BD34C622F99F4C003CB1B1 /* CharacteristicViewController.swift in Sources */,
+				D5BD34C222F9939E003CB1B1 /* ServicesTableViewController.swift in Sources */,
 				D5D6C56022F8357B001370CE /* CBManager.swift in Sources */,
 				D545681022F89A10004033D4 /* extensions.swift in Sources */,
 				D51B337D22F8B312006CB9BB /* AppConstants.swift in Sources */,
+				D5BD34C422F99734003CB1B1 /* CharcteristicsTableViewController.swift in Sources */,
 				D5D6C54F22F834D1001370CE /* BLEDevicesVC.swift in Sources */,
 				D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */,
 				D545680E22F89857004033D4 /* PeripheralViewController.swift in Sources */,
