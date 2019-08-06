@@ -22,7 +22,7 @@ class CBManager: NSObject {
     let peripherals = BehaviorRelay<[PeripheralModel]>(value: [])
     
     fileprivate var centralManager: CBCentralManager?
-    weak var vc: UIViewController?
+    weak var navController: UINavigationController?
     
     let onDataWritten: PublishSubject<(isWriteSuccessful: Bool, characteristic: CBCharacteristic, error: Error?)> = PublishSubject.init()
     let onReadData: PublishSubject<(isReadSuccessful: Bool, characteristic: CBCharacteristic, readText: String?)> = PublishSubject.init()
@@ -81,7 +81,8 @@ extension CBManager: CBCentralManagerDelegate {
         }
         
         DispatchQueue.main.async {[unowned self]  in
-            UIAlertController.displayAlert(message: nil, title: statusMsg, inViewController: self.vc)
+            let latestVc = self.navController?.viewControllers.last
+            UIAlertController.displayAlert(message: nil, title: statusMsg, inViewController: latestVc)
         }
     }
     
@@ -105,14 +106,14 @@ extension CBManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        UIAlertController.displayAlert(message: nil, title: "didDisconnect", inViewController: vc)
+        showAlertWithTitle(title: "didDisconnect", message: nil)
+//        UIAlertController.displayAlert(message: nil, title: , inViewController: vc)
     }
     
 }
 extension CBManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
-        UIAlertController.displayAlert(message: nil, title: "did discovered service", inViewController: vc)
         for service in peripheral.services! {
             peripheral.discoverCharacteristics(nil, for: service)
         }
@@ -167,5 +168,10 @@ extension CBManager {
         
         let peripheral = peripherals.value[index].peripheral
         peripheral.readValue(for: mainCharacteristic)
+    }
+    
+    func showAlertWithTitle(title: String?, message: String?) {
+        let latestVc = self.navController?.viewControllers.last
+        UIAlertController.displayAlert(message: message, title: title ?? "", inViewController: latestVc)
     }
 }

@@ -11,8 +11,10 @@ import RxSwift
 import RxCocoa
 import CoreBluetooth
 
-class PeripheralViewController: UIViewController {
+//MARK: - PeripheralViewController
+final class PeripheralViewController: UIViewController {
 
+    //MARK: IBOutlet Member Declarations
     @IBOutlet weak var peripheralNameLabel: UILabel!
     @IBOutlet weak var uuidLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
@@ -20,25 +22,21 @@ class PeripheralViewController: UIViewController {
     @IBOutlet weak var serviceUUIDLabel: UILabel!
     @IBOutlet weak var sevicesNavButton: UIButton!
     
+    //MARK: fileprivate Member Declarations
     fileprivate let CBManagerInstance = CBManager.shared
-    var connectBarbuttonItem: UIBarButtonItem!
-    
-    var peripheralIndex: Int?
     fileprivate let bag = DisposeBag()
     fileprivate lazy var characteristicsVC = ServicesTableViewController.init(style: .plain)
     
+    //MARK:  Member Declarations
+    var peripheralIndex: Int?
+   
+    //MARK: IBAction Methods Implementation
     @IBAction func servicesNavAction(_ sender: Any) {
          characteristicsVC.peripheralIndex = peripheralIndex
         self.navigationController?.pushViewController(characteristicsVC, animated: true)
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        connectBarbuttonItem = UIBarButtonItem.init(title: "", style: .done, target: self, action: #selector(connectOrDisconnectToPeripheral))
-        self.navigationItem.rightBarButtonItem = connectBarbuttonItem
-    }
-    
+    //MARK: ViewLifeCycle Methods Implementation
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -48,18 +46,23 @@ class PeripheralViewController: UIViewController {
         
         let model = CBManager.shared.peripherals.value[index]
         
-        connectBarbuttonItem.title = model.peripheral.state == CBPeripheralState.disconnected ? "Connect" : "Disconnect"
-        CBManagerInstance.onConnectionCallBack
-            .subscribe(onNext: {[unowned self] (peripheral) in
-            if peripheral.identifier.uuidString == model.peripheral.identifier.uuidString {
-                self.connectBarbuttonItem.title = model.peripheral.state == CBPeripheralState.disconnected ? "Connect" : "Disconnect"
-                self.statusLabel.text =  "Status: " + self.CBManagerInstance.decodePeripheralState(peripheralState: model.peripheral.state)
-            }
-        })
-        .disposed(by: bag)
-        
+        showPeripheralData(model: model)
+        subscribeToCBManagerCallBacks(model: model)
+    }
+}
+
+//MARK: - PeripheralViewController: Fileprivate Methods Implementaion
+extension PeripheralViewController {
+    @objc fileprivate func connectToPeripheral() {
+        guard let index = peripheralIndex else {
+            return
+        }
+
+        CBManager.shared.connectToPheripheral(deviceIndex: index)
+    }
+    
+    fileprivate func showPeripheralData(model : PeripheralModel) {
         self.peripheralNameLabel.text = "Name: " + (model.peripheral.name ?? "Unnamed service")
-        
         self.uuidLabel.text = "UUID: " + model.peripheral.identifier.uuidString
         self.statusLabel.text =  "Status: " + CBManager.shared.decodePeripheralState(peripheralState: model.peripheral.state)
         if let uuids = model.advertisementData["kCBAdvDataServiceUUIDs"] as? [CBUUID], let uniqueID = uuids.first?.uuidString {
@@ -68,27 +71,31 @@ class PeripheralViewController: UIViewController {
         else {
             self.serviceUUIDLabel.text = "Service  UUID: UnAvailable"
         }
-
+        
         if let isConnectable = model.advertisementData["kCBAdvDataIsConnectable"] as? Bool {
             self.advertisementIsConnectableLabel.text = isConnectable ? "Yes.. is connectable" : "No.. not connectable"
         }
-    }
-}
-extension PeripheralViewController {
-    @objc func connectOrDisconnectToPeripheral() {
-        guard let index = peripheralIndex else {
-            return
-        }
-        
-        let model = CBManager.shared.peripherals.value[index]
-        
-        if model.peripheral.state.rawValue == 0 {
-            CBManager.shared.connectToPheripheral(deviceIndex: index) 
-        }
-        else {
-            self.connectBarbuttonItem.title = "Connect"
-        }
+        self.showOrHideConnectButton(model.peripheral.state == CBPeripheralState.disconnected)
     }
     
+    fileprivate func showOrHideConnectButton(_ shouldShow: Bool){
+        self.navigationItem.rightBarButtonItem = shouldShow ? UIBarButtonItem.init(title: "Connect", style: .done, target: self, action: #selector(connectToPeripheral)) : nil
+    }
     
+    fileprivate func  subscribeToCBManagerCallBacks(model : PeripheralModel) {
+        CBManagerInstance.onConnectionCallBack
+            .subscribe(onNext: {[unowned self] (peripheral, error) in
+                
+                guard error == nil else {
+                    UIAlertController.displayAlert(message: "Failed to connect to peripheral with error: \(error!.localizedDescription)", title: "Error", inViewController: self)
+                    return
+                }
+                
+                if peripheral.identifier.uuidString == model.peripheral.identifier.uuidString {
+                    self.showOrHideConnectButton(model.peripheral.state == CBPeripheralState.disconnected)
+                    self.statusLabel.text =  "Status: " + self.CBManagerInstance.decodePeripheralState(peripheralState: model.peripheral.state)
+                }
+            })
+            .disposed(by: bag)
+    }
 }

@@ -50,7 +50,7 @@ class BLEDevicesVC: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.bleDevicesTableView.register(UINib.init(nibName: String(describing: PheripheralTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: PheripheralTableViewCell.self))
 
-        CBManagerInstance.vc = self
+        CBManagerInstance.navController = self.navigationController
         bleDevicesTableView.tableFooterView = UIView.init()
         CBManagerInstance.peripherals
             .bind(to: bleDevicesTableView.rx.items) { (tableView, row, element) in
