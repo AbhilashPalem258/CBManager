@@ -13,7 +13,7 @@ import RxCocoa
 
 protocol CBManagementProtocol {
     func toggleBluetoothOnOffState()
-    func connectToPheripheral(deviceIndex: Int, completionHandler: @escaping (_ status: Bool) -> ())
+    func connectToPheripheral(deviceIndex: Int)
 }
 
 class CBManager: NSObject {
@@ -22,11 +22,11 @@ class CBManager: NSObject {
     let peripherals = BehaviorRelay<[PeripheralModel]>(value: [])
     
     fileprivate var centralManager: CBCentralManager?
-    var connectionCompletionHandler: ((_ status: Bool) -> ())?
     weak var vc: UIViewController?
     
     let onDataWritten: PublishSubject<(isWriteSuccessful: Bool, characteristic: CBCharacteristic, error: Error?)> = PublishSubject.init()
     let onReadData: PublishSubject<(isReadSuccessful: Bool, characteristic: CBCharacteristic, readText: String?)> = PublishSubject.init()
+    let onConnectionCallBack: PublishSubject<(peripheral: CBPeripheral, error: Error?)> = PublishSubject.init()
 
     var isScanning: Bool {
         return centralManager!.isScanning
@@ -53,16 +53,14 @@ extension CBManager: CBManagementProtocol {
         }
     }
     
-    func connectToPheripheral(deviceIndex: Int, completionHandler: @escaping (_ status: Bool) -> ()) {
-         connectionCompletionHandler = completionHandler
+    func connectToPheripheral(deviceIndex: Int) {
          centralManager?.connect(peripherals.value[deviceIndex].peripheral, options: nil)
     }
 }
 extension CBManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        if let block = connectionCompletionHandler { block(false) }
-        UIAlertController.displayAlert(message: nil, title: "didFailToConnect", inViewController: vc)
+        onConnectionCallBack.onNext((peripheral: peripheral, error: error))
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -98,7 +96,7 @@ extension CBManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        if let block = connectionCompletionHandler { block(true) }
+        onConnectionCallBack.onNext((peripheral: peripheral, error: nil))
         let connectedPeripheralmodel = peripherals.value.filter { (model) -> Bool in
             return model.peripheral.identifier.uuidString == peripheral.identifier.uuidString
         }.first

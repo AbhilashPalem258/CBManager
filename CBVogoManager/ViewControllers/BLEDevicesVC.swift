@@ -52,7 +52,7 @@ class BLEDevicesVC: UIViewController {
 
         CBManagerInstance.vc = self
         bleDevicesTableView.tableFooterView = UIView.init()
-        CBManagerInstance.segments
+        CBManagerInstance.peripherals
             .bind(to: bleDevicesTableView.rx.items) { (tableView, row, element) in
                 let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PheripheralTableViewCell.self), for: IndexPath(row: row, section: 0)) as! PheripheralTableViewCell
                 cell.nameLabel.text = element.peripheral.name ?? "Unnamed Service"
@@ -74,7 +74,7 @@ class BLEDevicesVC: UIViewController {
             
         }).disposed(by: bag)
         
-        CBManagerInstance.segments.asObservable().subscribe(onNext: {[unowned self] (devices) in
+        CBManagerInstance.peripherals.asObservable().subscribe(onNext: {[unowned self] (devices) in
             self.bleDevicesTableView.backgroundView =  (devices.count == 0) ? self.noPeripheralsMsgLabel : UIView.init()
             self.bleDevicesTableView.separatorStyle = (devices.count == 0) ? .none : .singleLine
         })

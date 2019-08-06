@@ -27,7 +27,7 @@ class ServicesTableViewController: UITableViewController {
             return
         }
         
-        let model = CBManager.shared.segments.value[index]
+        let model = CBManager.shared.peripherals.value[index]
         
         services = BehaviorRelay<[CBService]>(value: model.peripheral.services ?? [])
         
