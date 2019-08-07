@@ -10,8 +10,6 @@ import UIKit
 
 class RUIButton: UIButton {
     
-    @IBInspectable var FontSizeType: String?
-    @IBInspectable var FontStyleType: String?
     @IBInspectable var textColor: String?
     @IBInspectable var backGroundColor: String?
     @IBInspectable var cornerradius: CGFloat = 0
@@ -22,7 +20,6 @@ class RUIButton: UIButton {
         setTitleColor(color, for: .normal)
         self.titleLabel?.textColor = color
         backgroundColor = UIColor.getColorFromString(colorInString: backGroundColor)
-//        self.titleLabel?.font = UIFont.getFontAndFontSizeInString(fontSizeType: FontSizeType, fontStyle: FontStyleType)
         self.layer.cornerRadius = cornerradius
     }
 }

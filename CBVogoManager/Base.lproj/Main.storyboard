@@ -176,14 +176,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2Y-zQ-7PP">
-                                <rect key="frame" x="16" y="77" width="343" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2Y-zQ-7PP" customClass="RUIAllBorderedLabel" customModule="CBVogoManager" customModuleProvider="target">
+                                <rect key="frame" x="16" y="77" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="o2I-0q-Ka4"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="borderColor" value="textBlack"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="borderWidth" value="1"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="radius" value="4"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LabelTextColor" value="textBlack"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4SW-ve-KHM" customClass="RUIButton" customModule="CBVogoManager" customModuleProvider="target">
-                                <rect key="frame" x="137.5" y="105.5" width="100" height="30"/>
+                                <rect key="frame" x="137.5" y="123" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="If2-yf-YG3"/>
                                     <constraint firstAttribute="width" constant="100" id="PSz-T8-g1u"/>
@@ -200,14 +209,29 @@
                                     <action selector="read:" destination="L08-Cp-WOr" eventType="touchUpInside" id="I49-E6-25P"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uqm-TE-Vej">
-                                <rect key="frame" x="16" y="164.5" width="343" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uqm-TE-Vej" customClass="RUIBorderedTF" customModule="CBVogoManager" customModuleProvider="target">
+                                <rect key="frame" x="16" y="174" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5Ew-JC-NDZ"/>
+                                </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="borderColor" value="textBlack"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="borderWidth" value="1"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="radius" value="4"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="LabelTextColor" value="textBlack"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingLeftCustom">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingRightCustom">
+                                        <real key="value" value="16"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eg-Ai-Cyo" customClass="RUIButton" customModule="CBVogoManager" customModuleProvider="target">
-                                <rect key="frame" x="137.5" y="202.5" width="100" height="30"/>
+                                <rect key="frame" x="137.5" y="220" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6hL-s3-DtO"/>
                                     <constraint firstAttribute="width" constant="100" id="znP-Va-maA"/>
@@ -229,7 +253,7 @@
                         <constraints>
                             <constraint firstItem="ceB-iH-2uA" firstAttribute="trailing" secondItem="t2Y-zQ-7PP" secondAttribute="trailing" constant="16" id="EYM-vR-nZs"/>
                             <constraint firstItem="ceB-iH-2uA" firstAttribute="trailing" secondItem="uqm-TE-Vej" secondAttribute="trailing" constant="16" id="GKM-wb-7Qe"/>
-                            <constraint firstItem="9eg-Ai-Cyo" firstAttribute="top" secondItem="uqm-TE-Vej" secondAttribute="bottom" constant="8" id="Jnx-FJ-RIT"/>
+                            <constraint firstItem="9eg-Ai-Cyo" firstAttribute="top" secondItem="uqm-TE-Vej" secondAttribute="bottom" constant="16" id="Jnx-FJ-RIT"/>
                             <constraint firstItem="9eg-Ai-Cyo" firstAttribute="centerX" secondItem="qbl-Zq-R0s" secondAttribute="centerX" id="LJl-fj-4Y4"/>
                             <constraint firstItem="t2Y-zQ-7PP" firstAttribute="top" secondItem="al6-1s-TPA" secondAttribute="bottom" constant="20" id="QJ2-Ic-kxW"/>
                             <constraint firstItem="ceB-iH-2uA" firstAttribute="trailing" secondItem="al6-1s-TPA" secondAttribute="trailing" id="VTz-nb-NH2"/>
@@ -239,7 +263,7 @@
                             <constraint firstItem="al6-1s-TPA" firstAttribute="top" secondItem="ceB-iH-2uA" secondAttribute="top" constant="16" id="fFl-Zb-rfA"/>
                             <constraint firstItem="al6-1s-TPA" firstAttribute="leading" secondItem="ceB-iH-2uA" secondAttribute="leading" id="sbK-j6-mSW"/>
                             <constraint firstItem="t2Y-zQ-7PP" firstAttribute="leading" secondItem="ceB-iH-2uA" secondAttribute="leading" constant="16" id="tfg-v4-CYx"/>
-                            <constraint firstItem="4SW-ve-KHM" firstAttribute="top" secondItem="t2Y-zQ-7PP" secondAttribute="bottom" constant="8" id="zau-Zr-TcP"/>
+                            <constraint firstItem="4SW-ve-KHM" firstAttribute="top" secondItem="t2Y-zQ-7PP" secondAttribute="bottom" constant="16" id="zau-Zr-TcP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ceB-iH-2uA"/>
                     </view>

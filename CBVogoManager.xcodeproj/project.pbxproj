@@ -13,6 +13,7 @@
 		D51B337922F8AA13006CB9BB /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337822F8AA13006CB9BB /* ColorConstants.swift */; };
 		D51B337D22F8B312006CB9BB /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337C22F8B312006CB9BB /* AppConstants.swift */; };
 		D51B338622F8B5CD006CB9BB /* RUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B338522F8B5CD006CB9BB /* RUILabel.swift */; };
+		D5217DA122FB12D20093395E /* RUITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5217DA022FB12D20093395E /* RUITextField.swift */; };
 		D545680C22F87437004033D4 /* PeripheralModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680B22F87437004033D4 /* PeripheralModel.swift */; };
 		D545680E22F89857004033D4 /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680D22F89856004033D4 /* PeripheralViewController.swift */; };
 		D545681022F89A10004033D4 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680F22F89A10004033D4 /* extensions.swift */; };
@@ -41,6 +42,7 @@
 		D51B337822F8AA13006CB9BB /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		D51B337C22F8B312006CB9BB /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		D51B338522F8B5CD006CB9BB /* RUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUILabel.swift; sourceTree = "<group>"; };
+		D5217DA022FB12D20093395E /* RUITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUITextField.swift; sourceTree = "<group>"; };
 		D545680B22F87437004033D4 /* PeripheralModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralModel.swift; sourceTree = "<group>"; };
 		D545680D22F89856004033D4 /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
 		D545680F22F89A10004033D4 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				D5BD34C722FA0307003CB1B1 /* RUIButton.swift */,
 				D5BD34C922FA0ED0003CB1B1 /* RUIViewController.swift */,
 				D5BD34CB22FA0F42003CB1B1 /* RUITableViewController.swift */,
+				D5217DA022FB12D20093395E /* RUITextField.swift */,
 			);
 			path = RUIElements;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				D51B337D22F8B312006CB9BB /* AppConstants.swift in Sources */,
 				D5BD34C422F99734003CB1B1 /* CharcteristicsTableViewController.swift in Sources */,
 				D5D6C54F22F834D1001370CE /* BLEDevicesVC.swift in Sources */,
+				D5217DA122FB12D20093395E /* RUITextField.swift in Sources */,
 				D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */,
 				D545680E22F89857004033D4 /* PeripheralViewController.swift in Sources */,
 				D545680C22F87437004033D4 /* PeripheralModel.swift in Sources */,

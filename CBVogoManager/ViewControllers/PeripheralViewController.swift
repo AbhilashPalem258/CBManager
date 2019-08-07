@@ -118,6 +118,6 @@ extension PeripheralViewController {
     fileprivate func showOrHideservicesButton(){
         self.servicesButton.setTitle((self.model.peripheral.services?.count == 0 ? "No Services" : "Services"), for: .normal)
         self.servicesButton.isEnabled = self.model.peripheral.services?.count != 0
-        self.servicesButton.isHidden = model.peripheral.state == CBPeripheralState.disconnected
+        self.servicesButton.isHidden = model.peripheral.state != CBPeripheralState.connected
     }
 }

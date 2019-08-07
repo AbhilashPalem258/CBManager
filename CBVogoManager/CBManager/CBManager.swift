@@ -155,10 +155,13 @@ extension CBManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        guard !self.isPeripheralAlreadyPresent(withUUID: peripheral.identifier.uuidString) else {
+            return
+        }
         
-        let peripheralObj = PeripheralModel.init(peripheral: peripheral, rssiVal: RSSI, advertisementData: advertisementData)
-        
-        var devices = peripherals.value
+       let peripheralObj = PeripheralModel.init(peripheral: peripheral, rssiVal: RSSI, advertisementData: advertisementData)
+
+       var devices = peripherals.value
         devices.append(peripheralObj)
         DispatchQueue.main.async {[unowned self]  in
             self.peripherals.accept(devices)
@@ -230,5 +233,15 @@ extension CBManager {
     fileprivate func showAlertWithTitle(title: String?, message: String?) {
         let latestVc = self.navController?.viewControllers.last
         UIAlertController.displayAlert(message: message, title: title ?? "", inViewController: latestVc)
+    }
+    
+    fileprivate func isPeripheralAlreadyPresent(withUUID peripheralId: String!) -> Bool {
+        var isAlreadyPresent = false
+        peripherals.value.forEach({ (model) in
+            if model.peripheral.identifier.uuidString == peripheralId {
+                isAlreadyPresent = true
+            }
+        })
+        return isAlreadyPresent
     }
 }
