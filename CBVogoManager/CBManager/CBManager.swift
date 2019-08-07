@@ -12,11 +12,13 @@ import RxSwift
 import RxCocoa
 
 protocol CBManagementProtocol {
-    func toggleBluetoothOnOffState()
+    func toggleBluetoothOnOffState(isOn: Bool)
     func connectToPheripheral(deviceIndex: Int)
+    func sendDataToPeripheralWithIndex(data: Data?, peripheralIndex: Int?, characteristic: CBCharacteristic?)
+    func readDataFromPerpheralWithIndex(peripheralIndex: Int?, characteristic: CBCharacteristic?)
 }
 
-class CBManager: NSObject {
+final class CBManager: NSObject {
     static let shared = CBManager.init()
     
     let peripherals = BehaviorRelay<[PeripheralModel]>(value: [])
@@ -27,6 +29,7 @@ class CBManager: NSObject {
     let onDataWritten: PublishSubject<(isWriteSuccessful: Bool, characteristic: CBCharacteristic, error: Error?)> = PublishSubject.init()
     let onReadData: PublishSubject<(isReadSuccessful: Bool, characteristic: CBCharacteristic, readText: String?)> = PublishSubject.init()
     let onConnectionCallBack: PublishSubject<(peripheral: CBPeripheral, error: Error?)> = PublishSubject.init()
+    let didDiscoveredServicesCallBack: PublishSubject<(uuid: String, error: Error?)> = PublishSubject.init()
 
     var isScanning: Bool {
         return centralManager!.isScanning
@@ -35,32 +38,53 @@ class CBManager: NSObject {
     private override init() {
         super.init()
         let centralQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.centralQueueName", attributes: .concurrent)
-        centralManager =  CBCentralManager.init(delegate: self, queue: nil)
+        centralManager =  CBCentralManager.init(delegate: self, queue: centralQueue)
     }
 }
 extension CBManager: CBManagementProtocol {
-    func toggleBluetoothOnOffState() {
+    func toggleBluetoothOnOffState(isOn: Bool) {
         guard let manager = centralManager else {
             return
         }
         
-        if manager.isScanning {
+        if !isOn {
             peripherals.accept([])
-            centralManager?.stopScan()
+            manager.stopScan()
         }
         else{
-            centralManager?.scanForPeripherals(withServices: nil, options: nil)
+            manager.scanForPeripherals(withServices: nil, options: nil)
         }
     }
     
     func connectToPheripheral(deviceIndex: Int) {
          centralManager?.connect(peripherals.value[deviceIndex].peripheral, options: nil)
     }
+    
+    func sendDataToPeripheralWithIndex(data: Data?, peripheralIndex: Int?, characteristic: CBCharacteristic?) {
+        
+        guard let index = peripheralIndex, let dataToSend = data, let mainCharacteristic = characteristic  else {
+            return
+        }
+        
+        let peripheral = peripherals.value[index].peripheral
+        peripheral.writeValue(dataToSend, for: mainCharacteristic, type: CBCharacteristicWriteType.withResponse)
+    }
+    
+    func readDataFromPerpheralWithIndex(peripheralIndex: Int?, characteristic: CBCharacteristic?) {
+        guard let index = peripheralIndex, let mainCharacteristic = characteristic  else {
+            return
+        }
+        
+        let peripheral = peripherals.value[index].peripheral
+        peripheral.readValue(for: mainCharacteristic)
+    }
 }
 extension CBManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
-        onConnectionCallBack.onNext((peripheral: peripheral, error: error))
+        DispatchQueue.main.async {[unowned self]  in
+            self.onConnectionCallBack.onNext((peripheral: peripheral, error: error))
+        }
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
@@ -97,17 +121,21 @@ extension CBManager: CBCentralManagerDelegate {
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        onConnectionCallBack.onNext((peripheral: peripheral, error: nil))
+        DispatchQueue.main.async {[unowned self]  in
+            self.onConnectionCallBack.onNext((peripheral: peripheral, error: nil))
+        }
         let connectedPeripheralmodel = peripherals.value.filter { (model) -> Bool in
             return model.peripheral.identifier.uuidString == peripheral.identifier.uuidString
         }.first
-        peripheral.discoverServices(connectedPeripheralmodel!.advertisementData["kCBAdvDataServiceUUIDs"] as? [CBUUID])
+    peripheral.discoverServices(connectedPeripheralmodel!.advertisementData[PeripheralVCConstants.string.kCBAdvDataServiceUUIDsKey] as? [CBUUID])
         peripheral.delegate = self
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-        showAlertWithTitle(title: "didDisconnect", message: nil)
-//        UIAlertController.displayAlert(message: nil, title: , inViewController: vc)
+        DispatchQueue.main.async {[unowned self]  in
+            self.navController?.popToRootViewController(animated: true)
+            self.showAlertWithTitle(title: "Perpheral Disconnect", message: nil)
+        }
     }
     
 }
@@ -116,6 +144,9 @@ extension CBManager: CBPeripheralDelegate {
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         for service in peripheral.services! {
             peripheral.discoverCharacteristics(nil, for: service)
+        }
+        DispatchQueue.main.async {[unowned self]  in
+            self.didDiscoveredServicesCallBack.onNext((uuid: peripheral.identifier.uuidString, error: error))
         }
     }
     
@@ -127,13 +158,17 @@ extension CBManager: CBPeripheralDelegate {
         if(characteristic.value != nil) {
             let stringValue = String(data: characteristic.value!, encoding: String.Encoding.utf8)
             let isSuceessful = (error == nil)
-            onReadData.onNext((isReadSuccessful: isSuceessful, characteristic: characteristic, readText: stringValue))
+            DispatchQueue.main.async {[unowned self]  in
+                self.onReadData.onNext((isReadSuccessful: isSuceessful, characteristic: characteristic, readText: stringValue))
+            }
         }
     }
     
     func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
         let isSuceessful = (error == nil)
-        onDataWritten.onNext((isWriteSuccessful: isSuceessful, characteristic: characteristic, error: error))
+        DispatchQueue.main.async {[unowned self]  in
+            self.onDataWritten.onNext((isWriteSuccessful: isSuceessful, characteristic: characteristic, error: error))
+        }
     }
     
 }
@@ -149,25 +184,6 @@ extension CBManager {
         case .disconnecting:
             return "Disconnecting"
         }
-    }
-    
-    func sendDataToPeripheralWithIndex(data: Data?, peripheralIndex: Int?, characteristic: CBCharacteristic?) {
-        
-        guard let index = peripheralIndex, let dataToSend = data, let mainCharacteristic = characteristic  else {
-            return
-        }
-        
-        let peripheral = peripherals.value[index].peripheral
-        peripheral.writeValue(dataToSend, for: mainCharacteristic, type: CBCharacteristicWriteType.withResponse)
-    }
-    
-    func readDataFromPerpheralWithIndex(peripheralIndex: Int?, characteristic: CBCharacteristic?) {
-        guard let index = peripheralIndex, let mainCharacteristic = characteristic  else {
-            return
-        }
-        
-        let peripheral = peripherals.value[index].peripheral
-        peripheral.readValue(for: mainCharacteristic)
     }
     
     func showAlertWithTitle(title: String?, message: String?) {

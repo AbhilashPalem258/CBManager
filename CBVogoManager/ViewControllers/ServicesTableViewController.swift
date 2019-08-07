@@ -11,15 +11,22 @@ import RxSwift
 import RxCocoa
 import CoreBluetooth
 
-class ServicesTableViewController: UITableViewController {
+//MARK: - ServicesTableViewController
+final class ServicesTableViewController: RUITableViewController {
     
+    //MARK: Member Declarations
     var peripheralIndex: Int?
     
+    //MARK: Fileprivate Member Declarations
     fileprivate let bag = DisposeBag()
-    
     fileprivate lazy var characteristicsVC = CharcteristicsTableViewController.init(style: .plain)
-    
     fileprivate var services: BehaviorRelay<[CBService]>!
+    
+    //MARK: ViewLifeCycle Methods Implementations
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.title = AppConstants.VCTitles.serviceVC
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -30,13 +37,14 @@ class ServicesTableViewController: UITableViewController {
         let model = CBManager.shared.peripherals.value[index]
         
         services = BehaviorRelay<[CBService]>(value: model.peripheral.services ?? [])
-        
-        tableView.tableFooterView = UIView.init()
-        tableView.delegate = nil
-        tableView.dataSource = nil
-        
-        self.tableView.register(UINib.init(nibName: String(describing: PheripheralTableViewCell.self), bundle: nil), forCellReuseIdentifier: String(describing: PheripheralTableViewCell.self))
+        configureTableView()
+        handleTableView(services: services)
+    }
+}
 
+//MARK: - ServicesTableViewController: Private Method Implementation
+extension ServicesTableViewController {
+    fileprivate func handleTableView(services: BehaviorRelay<[CBService]>) {
         services
             .bind(to: tableView.rx.items) { (tableView, row, element) in
                 let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: PheripheralTableViewCell.self), for: IndexPath(row: row, section: 0)) as! PheripheralTableViewCell

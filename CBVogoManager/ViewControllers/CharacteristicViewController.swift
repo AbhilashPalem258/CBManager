@@ -11,17 +11,25 @@ import RxSwift
 import RxCocoa
 import CoreBluetooth
 
+//MARK: - CharacteristicViewController
 final class CharacteristicViewController: UIViewController {
     
-    @IBOutlet weak var characteristicPropertieslabel: UILabel!
+    //MARK: Member Declarations
     weak var characteristic: CBCharacteristic?
     var peripheralIndex: Int?
     
-    let CBManagerInstance = CBManager.shared
-    let bag = DisposeBag.init()
+    //MARK: Fileprivate Member Declarations
+    fileprivate let CBManagerInstance = CBManager.shared
+    fileprivate let bag = DisposeBag.init()
 
+    //MARK: IBOutlet Member Declarations
+    @IBOutlet weak var writeBtn: RUIButton!
+    @IBOutlet weak var readBtn: RUIButton!
     @IBOutlet weak var readLabel: UILabel!
     @IBOutlet weak var writeDataTF: UITextField!
+    @IBOutlet weak var characteristicPropertieslabel: UILabel!
+    
+    //MARK: IBAction Methods Implementation
     @IBAction func read(_ sender: Any) {
         CBManagerInstance.readDataFromPerpheralWithIndex(peripheralIndex: peripheralIndex, characteristic: characteristic)
     }
@@ -36,8 +44,28 @@ final class CharacteristicViewController: UIViewController {
         CBManagerInstance.sendDataToPeripheralWithIndex(data: data, peripheralIndex: index, characteristic: characteristic)
     }
     
+    //MARK: ViewLifeCycle Methods Implementations
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = AppConstants.VCTitles.characteristicVC
+        setPropertiesLabel()
+        subscribeForCBManagerCallBacks()
+    }
+}
+
+//MARK: - CharacteristicViewController: FilePrivate Methods implementation
+extension CharacteristicViewController {
+    fileprivate func setPropertiesLabel() {
+        var propertieslabel = ""
+        propertieslabel += characteristic!.properties.contains(CBCharacteristicProperties.write) ? "isWritable" : "Not writable"
+        propertieslabel += characteristic!.properties.contains(CBCharacteristicProperties.read) ? ", isReadable" : ", Not Readable"
+        self.characteristicPropertieslabel.text = propertieslabel
+        
+        self.writeBtn.isEnabled = characteristic!.properties.contains(CBCharacteristicProperties.write)
+        self.readBtn.isEnabled = characteristic!.properties.contains(CBCharacteristicProperties.read)
+    }
+    
+    fileprivate func subscribeForCBManagerCallBacks() {
         CBManagerInstance.onReadData
             .asObservable()
             .subscribe(onNext: {[unowned self] (isReadSuccessful: Bool, characteristic: CBCharacteristic, readText: String?) in
@@ -45,7 +73,7 @@ final class CharacteristicViewController: UIViewController {
                     self.readLabel.text = readText
                 }
                 else {
-                    UIAlertController.displayAlert(message: "Issue in reading data. please try again", title: "Error", inViewController: self)
+                    UIAlertController.displayAlert(message: AppConstants.errMsgs.failedToReadData, title: AppConstants.display.Error, inViewController: self)
                 }
             })
             .disposed(by: bag)
@@ -54,24 +82,12 @@ final class CharacteristicViewController: UIViewController {
             .asObservable()
             .subscribe(onNext: {[unowned self]  (isWriteSuccessful: Bool, characteristic: CBCharacteristic, error: Error?) in
                 if isWriteSuccessful {
-                    UIAlertController.displayAlert(message: "Data sucessfully written to characteristic", title: "Success", inViewController: self)
+                    UIAlertController.displayAlert(message: AppConstants.successMsgs.dataWrittenSuccessFulMsg, title: AppConstants.display.success, inViewController: self)
                 }
                 else {
-                    UIAlertController.displayAlert(message: "Some issue in reading data. please try again", title: "Error", inViewController: self)
+                    UIAlertController.displayAlert(message: AppConstants.errMsgs.failedToReadData, title: AppConstants.display.Error, inViewController: self)
                 }
             })
             .disposed(by: bag)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        var propertieslabel = ""
-        if characteristic!.properties.contains(CBCharacteristicProperties.write) {
-            propertieslabel += "isWritable"
-        }
-        if characteristic!.properties.contains(CBCharacteristicProperties.read) {
-            propertieslabel += ", isReadable"
-        }
-        self.characteristicPropertieslabel.text = propertieslabel
     }
 }

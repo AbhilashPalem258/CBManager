@@ -106,12 +106,20 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="cornerRadius" value="4"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osr-zG-gSx">
-                                <rect key="frame" x="158" y="192.5" width="59" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="osr-zG-gSx" customClass="RUIButton" customModule="CBVogoManager" customModuleProvider="target">
+                                <rect key="frame" x="137.5" y="192.5" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HNI-UQ-9pA"/>
+                                    <constraint firstAttribute="width" constant="100" id="RVy-Ms-qGj"/>
                                 </constraints>
                                 <state key="normal" title="Services"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="textColor" value="textWhite"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="backGroundColor" value="bgBlue"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerradius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="servicesNavAction:" destination="syC-JS-M9n" eventType="touchUpInside" id="23F-eh-m9j"/>
                                 </connections>
@@ -144,6 +152,7 @@
                         <outlet property="advertisementIsConnectableLabel" destination="9rs-Va-w42" id="b1K-VM-zG9"/>
                         <outlet property="peripheralNameLabel" destination="UEq-3h-xR5" id="3ga-ma-vJz"/>
                         <outlet property="serviceUUIDLabel" destination="zV1-qY-kDr" id="b5Z-LJ-gdS"/>
+                        <outlet property="servicesButton" destination="osr-zG-gSx" id="B7m-5Q-d77"/>
                         <outlet property="sevicesNavButton" destination="osr-zG-gSx" id="DTj-OO-uzH"/>
                         <outlet property="statusLabel" destination="D7m-Z2-DiR" id="3z3-jI-AG5"/>
                         <outlet property="uuidLabel" destination="4fm-wr-51H" id="SPa-hs-VDq"/>
@@ -167,28 +176,50 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2Y-zQ-7PP">
-                                <rect key="frame" x="16" y="77" width="343" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Read" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t2Y-zQ-7PP">
+                                <rect key="frame" x="16" y="77" width="343" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4SW-ve-KHM">
-                                <rect key="frame" x="170" y="106" width="35" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4SW-ve-KHM" customClass="RUIButton" customModule="CBVogoManager" customModuleProvider="target">
+                                <rect key="frame" x="137.5" y="105.5" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="If2-yf-YG3"/>
+                                    <constraint firstAttribute="width" constant="100" id="PSz-T8-g1u"/>
+                                </constraints>
                                 <state key="normal" title="Read"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="textColor" value="textWhite"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="backGroundColor" value="bgBlue"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerradius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="read:" destination="L08-Cp-WOr" eventType="touchUpInside" id="I49-E6-25P"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uqm-TE-Vej">
-                                <rect key="frame" x="16" y="165" width="343" height="30"/>
+                                <rect key="frame" x="16" y="164.5" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eg-Ai-Cyo">
-                                <rect key="frame" x="169" y="203" width="37" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eg-Ai-Cyo" customClass="RUIButton" customModule="CBVogoManager" customModuleProvider="target">
+                                <rect key="frame" x="137.5" y="202.5" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="6hL-s3-DtO"/>
+                                    <constraint firstAttribute="width" constant="100" id="znP-Va-maA"/>
+                                </constraints>
                                 <state key="normal" title="Write"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="textColor" value="textWhite"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="backGroundColor" value="bgBlue"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerradius">
+                                        <real key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="writeBtnAction:" destination="L08-Cp-WOr" eventType="touchUpInside" id="Iup-ZQ-Te3"/>
                                 </connections>
@@ -214,7 +245,9 @@
                     </view>
                     <connections>
                         <outlet property="characteristicPropertieslabel" destination="al6-1s-TPA" id="FiD-KW-Sly"/>
+                        <outlet property="readBtn" destination="4SW-ve-KHM" id="S0I-9B-cR4"/>
                         <outlet property="readLabel" destination="t2Y-zQ-7PP" id="sPG-d6-MOD"/>
+                        <outlet property="writeBtn" destination="9eg-Ai-Cyo" id="DQN-5Y-AwX"/>
                         <outlet property="writeDataTF" destination="uqm-TE-Vej" id="hnI-kX-HBI"/>
                     </connections>
                 </viewController>

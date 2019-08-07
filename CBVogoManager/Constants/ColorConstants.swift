@@ -9,5 +9,7 @@
 struct ColorConstants {
     static let clear = "clear"
     static let textBlack = "textBlack"
+    static let textWhite = "textWhite"
     static let shadowBlack = "shadowBlack"
+    static let bgBlue = "bgBlue"
 }

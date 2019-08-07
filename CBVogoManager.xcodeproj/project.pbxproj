@@ -11,7 +11,6 @@
 		D51B337422F8A85D006CB9BB /* RUICardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337322F8A85D006CB9BB /* RUICardView.swift */; };
 		D51B337622F8A909006CB9BB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337522F8A909006CB9BB /* Colors.swift */; };
 		D51B337922F8AA13006CB9BB /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337822F8AA13006CB9BB /* ColorConstants.swift */; };
-		D51B337B22F8B2B2006CB9BB /* LoaderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337A22F8B2B2006CB9BB /* LoaderManager.swift */; };
 		D51B337D22F8B312006CB9BB /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337C22F8B312006CB9BB /* AppConstants.swift */; };
 		D51B338122F8B480006CB9BB /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337F22F8B480006CB9BB /* LoaderView.swift */; };
 		D51B338222F8B480006CB9BB /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D51B338022F8B480006CB9BB /* LoaderView.xib */; };
@@ -23,6 +22,9 @@
 		D5BD34C222F9939E003CB1B1 /* ServicesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34C122F9939E003CB1B1 /* ServicesTableViewController.swift */; };
 		D5BD34C422F99734003CB1B1 /* CharcteristicsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34C322F99734003CB1B1 /* CharcteristicsTableViewController.swift */; };
 		D5BD34C622F99F4C003CB1B1 /* CharacteristicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34C522F99F4C003CB1B1 /* CharacteristicViewController.swift */; };
+		D5BD34C822FA0307003CB1B1 /* RUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34C722FA0307003CB1B1 /* RUIButton.swift */; };
+		D5BD34CA22FA0ED0003CB1B1 /* RUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34C922FA0ED0003CB1B1 /* RUIViewController.swift */; };
+		D5BD34CC22FA0F42003CB1B1 /* RUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5BD34CB22FA0F42003CB1B1 /* RUITableViewController.swift */; };
 		D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54C22F834D1001370CE /* AppDelegate.swift */; };
 		D5D6C54F22F834D1001370CE /* BLEDevicesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5D6C54E22F834D1001370CE /* BLEDevicesVC.swift */; };
 		D5D6C55222F834D1001370CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D5D6C55022F834D1001370CE /* Main.storyboard */; };
@@ -40,7 +42,6 @@
 		D51B337322F8A85D006CB9BB /* RUICardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUICardView.swift; sourceTree = "<group>"; };
 		D51B337522F8A909006CB9BB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		D51B337822F8AA13006CB9BB /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
-		D51B337A22F8B2B2006CB9BB /* LoaderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderManager.swift; sourceTree = "<group>"; };
 		D51B337C22F8B312006CB9BB /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		D51B337F22F8B480006CB9BB /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		D51B338022F8B480006CB9BB /* LoaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
@@ -52,6 +53,9 @@
 		D5BD34C122F9939E003CB1B1 /* ServicesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesTableViewController.swift; sourceTree = "<group>"; };
 		D5BD34C322F99734003CB1B1 /* CharcteristicsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharcteristicsTableViewController.swift; sourceTree = "<group>"; };
 		D5BD34C522F99F4C003CB1B1 /* CharacteristicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacteristicViewController.swift; sourceTree = "<group>"; };
+		D5BD34C722FA0307003CB1B1 /* RUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUIButton.swift; sourceTree = "<group>"; };
+		D5BD34C922FA0ED0003CB1B1 /* RUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUIViewController.swift; sourceTree = "<group>"; };
+		D5BD34CB22FA0F42003CB1B1 /* RUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUITableViewController.swift; sourceTree = "<group>"; };
 		D5D6C54922F834D1001370CE /* CBVogoManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CBVogoManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5D6C54C22F834D1001370CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D5D6C54E22F834D1001370CE /* BLEDevicesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEDevicesVC.swift; sourceTree = "<group>"; };
@@ -90,6 +94,9 @@
 				D51B338322F8B530006CB9BB /* RUICustomNIbView.swift */,
 				D51B337322F8A85D006CB9BB /* RUICardView.swift */,
 				D51B338522F8B5CD006CB9BB /* RUILabel.swift */,
+				D5BD34C722FA0307003CB1B1 /* RUIButton.swift */,
+				D5BD34C922FA0ED0003CB1B1 /* RUIViewController.swift */,
+				D5BD34CB22FA0F42003CB1B1 /* RUITableViewController.swift */,
 			);
 			path = RUIElements;
 			sourceTree = "<group>";
@@ -184,7 +191,6 @@
 			children = (
 				D545680F22F89A10004033D4 /* extensions.swift */,
 				D51B337522F8A909006CB9BB /* Colors.swift */,
-				D51B337A22F8B2B2006CB9BB /* LoaderManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -316,14 +322,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5D6C56522F8400F001370CE /* PheripheralTableViewCell.swift in Sources */,
+				D5BD34C822FA0307003CB1B1 /* RUIButton.swift in Sources */,
 				D51B337622F8A909006CB9BB /* Colors.swift in Sources */,
 				D51B337422F8A85D006CB9BB /* RUICardView.swift in Sources */,
 				D51B337922F8AA13006CB9BB /* ColorConstants.swift in Sources */,
-				D51B337B22F8B2B2006CB9BB /* LoaderManager.swift in Sources */,
+				D5BD34CA22FA0ED0003CB1B1 /* RUIViewController.swift in Sources */,
 				D5BD34C622F99F4C003CB1B1 /* CharacteristicViewController.swift in Sources */,
 				D5BD34C222F9939E003CB1B1 /* ServicesTableViewController.swift in Sources */,
 				D5D6C56022F8357B001370CE /* CBManager.swift in Sources */,
 				D545681022F89A10004033D4 /* extensions.swift in Sources */,
+				D5BD34CC22FA0F42003CB1B1 /* RUITableViewController.swift in Sources */,
 				D51B337D22F8B312006CB9BB /* AppConstants.swift in Sources */,
 				D5BD34C422F99734003CB1B1 /* CharcteristicsTableViewController.swift in Sources */,
 				D5D6C54F22F834D1001370CE /* BLEDevicesVC.swift in Sources */,
