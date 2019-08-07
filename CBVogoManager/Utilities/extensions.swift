@@ -8,6 +8,7 @@
 
 import UIKit
 
+//MARK: - UIAlertController Extension
 extension UIAlertController {
     @discardableResult static func displayAlert(message: String?, title: String, actionsArr:[(title: String, actionBlock:() -> ()?)]! = [], inViewController: UIViewController?, completionBlock : (() -> ())? = nil) -> UIAlertController? {
         
@@ -32,12 +33,14 @@ extension UIAlertController {
     }
 }
 
+//MARK: - UIStoryboard Extension
 extension UIStoryboard {
     static var main: UIStoryboard {
         return UIStoryboard.init(name: "Main", bundle: nil)
     }
 }
 
+//MARK: - String Extension
 extension String {
     func toCGFloat() -> CGFloat? {
         var float: CGFloat? = nil
@@ -47,11 +50,4 @@ extension String {
         return float
     }
 }
-extension UIView {
-    func loadNib() -> UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nibName = type(of: self).description().components(separatedBy: ".").last!
-        let nib = UINib(nibName: nibName, bundle: bundle)
-        return nib.instantiate(withOwner: self, options: nil).first as! UIView
-    }
-}
+

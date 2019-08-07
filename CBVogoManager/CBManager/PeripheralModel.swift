@@ -9,11 +9,15 @@
 import UIKit
 import CoreBluetooth
 
+//MARK: - PeripheralModel
 class PeripheralModel {
+    
+    //MARK: Member Declarations
     var peripheral: CBPeripheral
     var rssiValue: NSNumber
     var advertisementData: [String : Any]
     
+    //MARK: Initialization
     init(peripheral: CBPeripheral, rssiVal: NSNumber, advertisementData: [String : Any]) {
         self.peripheral = peripheral
         self.rssiValue = rssiVal

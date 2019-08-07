@@ -18,7 +18,7 @@ final class BLEDevicesVC: RUIViewController {
 
    //MARK: FilePrivate Member Declarations
    fileprivate let bag = DisposeBag()
-   fileprivate let CBManagerInstance = CBManager.shared
+   fileprivate var CBManagerInstance: CBManagementProtocol = (UIApplication.shared.delegate as! AppDelegate).CBManagerInstance
    fileprivate let peripheralVc = UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: PeripheralViewController.self)) as? PeripheralViewController
     
    //MARK: FilePrivate Computed Member Declarations
@@ -64,12 +64,12 @@ final class BLEDevicesVC: RUIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         CBManagerInstance.peripherals.accept([])
-        CBManager.shared.toggleBluetoothOnOffState(isOn: scanSwitch.isOn)
+        CBManagerInstance.toggleBluetoothOnOffState(isOn: scanSwitch.isOn)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        CBManager.shared.toggleBluetoothOnOffState(isOn: false)
+        CBManagerInstance.stopScanning()
     }
     
 }

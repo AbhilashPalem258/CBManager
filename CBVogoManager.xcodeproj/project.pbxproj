@@ -12,9 +12,6 @@
 		D51B337622F8A909006CB9BB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337522F8A909006CB9BB /* Colors.swift */; };
 		D51B337922F8AA13006CB9BB /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337822F8AA13006CB9BB /* ColorConstants.swift */; };
 		D51B337D22F8B312006CB9BB /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337C22F8B312006CB9BB /* AppConstants.swift */; };
-		D51B338122F8B480006CB9BB /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B337F22F8B480006CB9BB /* LoaderView.swift */; };
-		D51B338222F8B480006CB9BB /* LoaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D51B338022F8B480006CB9BB /* LoaderView.xib */; };
-		D51B338422F8B530006CB9BB /* RUICustomNIbView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B338322F8B530006CB9BB /* RUICustomNIbView.swift */; };
 		D51B338622F8B5CD006CB9BB /* RUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D51B338522F8B5CD006CB9BB /* RUILabel.swift */; };
 		D545680C22F87437004033D4 /* PeripheralModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680B22F87437004033D4 /* PeripheralModel.swift */; };
 		D545680E22F89857004033D4 /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D545680D22F89856004033D4 /* PeripheralViewController.swift */; };
@@ -43,9 +40,6 @@
 		D51B337522F8A909006CB9BB /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		D51B337822F8AA13006CB9BB /* ColorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		D51B337C22F8B312006CB9BB /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
-		D51B337F22F8B480006CB9BB /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
-		D51B338022F8B480006CB9BB /* LoaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoaderView.xib; sourceTree = "<group>"; };
-		D51B338322F8B530006CB9BB /* RUICustomNIbView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RUICustomNIbView.swift; sourceTree = "<group>"; };
 		D51B338522F8B5CD006CB9BB /* RUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUILabel.swift; sourceTree = "<group>"; };
 		D545680B22F87437004033D4 /* PeripheralModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralModel.swift; sourceTree = "<group>"; };
 		D545680D22F89856004033D4 /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
@@ -91,7 +85,6 @@
 		D51B337222F8A838006CB9BB /* RUIElements */ = {
 			isa = PBXGroup;
 			children = (
-				D51B338322F8B530006CB9BB /* RUICustomNIbView.swift */,
 				D51B337322F8A85D006CB9BB /* RUICardView.swift */,
 				D51B338522F8B5CD006CB9BB /* RUILabel.swift */,
 				D5BD34C722FA0307003CB1B1 /* RUIButton.swift */,
@@ -108,15 +101,6 @@
 				D51B337C22F8B312006CB9BB /* AppConstants.swift */,
 			);
 			path = Constants;
-			sourceTree = "<group>";
-		};
-		D51B337E22F8B44F006CB9BB /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				D51B337F22F8B480006CB9BB /* LoaderView.swift */,
-				D51B338022F8B480006CB9BB /* LoaderView.xib */,
-			);
-			path = Components;
 			sourceTree = "<group>";
 		};
 		D5D6C54022F834D1001370CE = {
@@ -140,7 +124,6 @@
 		D5D6C54B22F834D1001370CE /* CBVogoManager */ = {
 			isa = PBXGroup;
 			children = (
-				D51B337E22F8B44F006CB9BB /* Components */,
 				D51B337722F8AA00006CB9BB /* Constants */,
 				D51B337222F8A838006CB9BB /* RUIElements */,
 				D5D6C56722F84804001370CE /* Utilities */,
@@ -266,7 +249,6 @@
 			files = (
 				D5D6C56622F8400F001370CE /* PheripheralTableViewCell.xib in Resources */,
 				D5D6C55722F834D4001370CE /* LaunchScreen.storyboard in Resources */,
-				D51B338222F8B480006CB9BB /* LoaderView.xib in Resources */,
 				D5D6C55422F834D4001370CE /* Assets.xcassets in Resources */,
 				D5D6C55222F834D1001370CE /* Main.storyboard in Resources */,
 			);
@@ -338,9 +320,7 @@
 				D5D6C54D22F834D1001370CE /* AppDelegate.swift in Sources */,
 				D545680E22F89857004033D4 /* PeripheralViewController.swift in Sources */,
 				D545680C22F87437004033D4 /* PeripheralModel.swift in Sources */,
-				D51B338422F8B530006CB9BB /* RUICustomNIbView.swift in Sources */,
 				D51B338622F8B5CD006CB9BB /* RUILabel.swift in Sources */,
-				D51B338122F8B480006CB9BB /* LoaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

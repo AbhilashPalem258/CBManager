@@ -19,6 +19,7 @@ final class ServicesTableViewController: RUITableViewController {
     
     //MARK: Fileprivate Member Declarations
     fileprivate let bag = DisposeBag()
+    fileprivate var CBManagerInstance: CBManagementProtocol = (UIApplication.shared.delegate as! AppDelegate).CBManagerInstance
     fileprivate lazy var characteristicsVC = CharcteristicsTableViewController.init(style: .plain)
     fileprivate var services: BehaviorRelay<[CBService]>!
     
@@ -34,7 +35,7 @@ final class ServicesTableViewController: RUITableViewController {
             return
         }
         
-        let model = CBManager.shared.peripherals.value[index]
+        let model = CBManagerInstance.peripherals.value[index]
         
         services = BehaviorRelay<[CBService]>(value: model.peripheral.services ?? [])
         configureTableView()

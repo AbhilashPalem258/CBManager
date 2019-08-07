@@ -6,6 +6,7 @@
 //  Copyright © 2019 Abhilash Palem. All rights reserved.
 //
 
+//MARK: - ColorConstants
 struct ColorConstants {
     static let clear = "clear"
     static let textBlack = "textBlack"

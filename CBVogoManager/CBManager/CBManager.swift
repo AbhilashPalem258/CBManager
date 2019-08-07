@@ -11,36 +11,54 @@ import CoreBluetooth
 import RxSwift
 import RxCocoa
 
+//MARK: - CBManagementProtocol
 protocol CBManagementProtocol {
+    var onDataWritten: PublishSubject<(isWriteSuccessful: Bool, characteristic: CBCharacteristic, error: Error?)> { get set }
+    var onReadData: PublishSubject<(isReadSuccessful: Bool, characteristic: CBCharacteristic, readText: String?)> { get set }
+    var onConnectionCallBack: PublishSubject<(peripheral: CBPeripheral, error: Error?)> { get set }
+    var didDiscoveredServicesCallBack: PublishSubject<(uuid: String, error: Error?)>  { get set }
+    var navController: UINavigationController? { get set }
+    var isScanning: Bool { get }
+    var peripherals: BehaviorRelay<[PeripheralModel]> { get set }
+    
     func toggleBluetoothOnOffState(isOn: Bool)
     func connectToPheripheral(deviceIndex: Int)
     func sendDataToPeripheralWithIndex(data: Data?, peripheralIndex: Int?, characteristic: CBCharacteristic?)
     func readDataFromPerpheralWithIndex(peripheralIndex: Int?, characteristic: CBCharacteristic?)
+    func stopScanning()
+    func decodePeripheralState(peripheralState: CBPeripheralState) -> String
 }
 
+//MARK: - CBManager
 final class CBManager: NSObject {
+    
+    //MARK: Static Member Declarations
     static let shared = CBManager.init()
     
-    let peripherals = BehaviorRelay<[PeripheralModel]>(value: [])
-    
+    //MARK: FilePrivate Member Declarations
     fileprivate var centralManager: CBCentralManager?
-    weak var navController: UINavigationController?
-    
-    let onDataWritten: PublishSubject<(isWriteSuccessful: Bool, characteristic: CBCharacteristic, error: Error?)> = PublishSubject.init()
-    let onReadData: PublishSubject<(isReadSuccessful: Bool, characteristic: CBCharacteristic, readText: String?)> = PublishSubject.init()
-    let onConnectionCallBack: PublishSubject<(peripheral: CBPeripheral, error: Error?)> = PublishSubject.init()
-    let didDiscoveredServicesCallBack: PublishSubject<(uuid: String, error: Error?)> = PublishSubject.init()
 
+    //MARK: Member Declarations
+    var peripherals = BehaviorRelay<[PeripheralModel]>(value: [])
+    var navController: UINavigationController?
+    var onDataWritten: PublishSubject<(isWriteSuccessful: Bool, characteristic: CBCharacteristic, error: Error?)> = PublishSubject.init()
+    var onReadData: PublishSubject<(isReadSuccessful: Bool, characteristic: CBCharacteristic, readText: String?)> = PublishSubject.init()
+    var onConnectionCallBack: PublishSubject<(peripheral: CBPeripheral, error: Error?)> = PublishSubject.init()
+    var didDiscoveredServicesCallBack: PublishSubject<(uuid: String, error: Error?)> = PublishSubject.init()
+
+    //MARK: Computed Member Declarations
     var isScanning: Bool {
         return centralManager!.isScanning
     }
     
+    //MARK: Initialization
     private override init() {
         super.init()
         let centralQueue: DispatchQueue = DispatchQueue(label: "com.iosbrain.centralQueueName", attributes: .concurrent)
         centralManager =  CBCentralManager.init(delegate: self, queue: centralQueue)
     }
 }
+//MARK: - CBManager: CBManagementProtocol Methods Implementation
 extension CBManager: CBManagementProtocol {
     func toggleBluetoothOnOffState(isOn: Bool) {
         guard let manager = centralManager else {
@@ -80,7 +98,31 @@ extension CBManager: CBManagementProtocol {
         let peripheral = peripherals.value[index].peripheral
         peripheral.readValue(for: mainCharacteristic)
     }
+    
+    func stopScanning(){
+        guard let manager = centralManager else {
+            return
+        }
+        
+        if manager.isScanning {
+            manager.stopScan()
+        }
+    }
+    
+    func decodePeripheralState(peripheralState: CBPeripheralState) -> String {
+        switch peripheralState {
+        case .disconnected:
+            return "Disconnected"
+        case .connected:
+            return "Connected"
+        case .connecting:
+            return "Connecting"
+        case .disconnecting:
+            return "Disconnecting"
+        }
+    }
 }
+//MARK: - CBManager: CBCentralManagerDelegate Methods Implementation
 extension CBManager: CBCentralManagerDelegate {
     
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
@@ -143,6 +185,7 @@ extension CBManager: CBCentralManagerDelegate {
     }
     
 }
+//MARK: - CBManager: CBPeripheralDelegate Methods Implementation
 extension CBManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
@@ -181,21 +224,10 @@ extension CBManager: CBPeripheralDelegate {
     }
     
 }
+
+//MARK: - CBManager: Custom Methods Implementation
 extension CBManager {
-    func decodePeripheralState(peripheralState: CBPeripheralState) -> String {
-        switch peripheralState {
-        case .disconnected:
-            return "Disconnected"
-        case .connected:
-            return "Connected"
-        case .connecting:
-            return "Connecting"
-        case .disconnecting:
-            return "Disconnecting"
-        }
-    }
-    
-    func showAlertWithTitle(title: String?, message: String?) {
+    fileprivate func showAlertWithTitle(title: String?, message: String?) {
         let latestVc = self.navController?.viewControllers.last
         UIAlertController.displayAlert(message: message, title: title ?? "", inViewController: latestVc)
     }

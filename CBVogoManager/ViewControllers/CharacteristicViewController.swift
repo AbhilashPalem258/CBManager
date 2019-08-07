@@ -19,7 +19,7 @@ final class CharacteristicViewController: UIViewController {
     var peripheralIndex: Int?
     
     //MARK: Fileprivate Member Declarations
-    fileprivate let CBManagerInstance = CBManager.shared
+    fileprivate var CBManagerInstance: CBManagementProtocol = (UIApplication.shared.delegate as! AppDelegate).CBManagerInstance
     fileprivate let bag = DisposeBag.init()
 
     //MARK: IBOutlet Member Declarations

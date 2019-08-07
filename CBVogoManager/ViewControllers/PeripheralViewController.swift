@@ -24,7 +24,7 @@ final class PeripheralViewController: RUIViewController {
     @IBOutlet weak var servicesButton: RUIButton!
     
     //MARK: fileprivate Member Declarations
-    fileprivate let CBManagerInstance = CBManager.shared
+    fileprivate var CBManagerInstance: CBManagementProtocol = (UIApplication.shared.delegate as! AppDelegate).CBManagerInstance
     fileprivate let bag = DisposeBag()
     fileprivate lazy var servicesVC = ServicesTableViewController.init(style: .plain)
     fileprivate var model: PeripheralModel!
@@ -62,7 +62,7 @@ extension PeripheralViewController {
             return
         }
 
-        CBManager.shared.connectToPheripheral(deviceIndex: index)
+        CBManagerInstance.connectToPheripheral(deviceIndex: index)
     }
     
     fileprivate func showPeripheralData() {

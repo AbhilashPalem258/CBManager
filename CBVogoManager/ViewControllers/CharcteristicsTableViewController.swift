@@ -20,7 +20,6 @@ final class CharcteristicsTableViewController: RUITableViewController {
     
     //MARK: Fileprivate Member Declarations
     fileprivate let bag = DisposeBag()
-//    fileprivate lazy var characteristicsVC = UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: CharacteristicViewController.self)) as! CharacteristicViewController
 
     //MARK: ViewLifeCycle Methods Implementations
     override func viewDidLoad() {
