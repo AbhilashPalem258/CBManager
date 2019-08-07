@@ -69,7 +69,7 @@ final class BLEDevicesVC: RUIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        CBManager.shared.toggleBluetoothOnOffState(isOn: false)
+//        CBManager.shared.toggleBluetoothOnOffState(isOn: false)
     }
     
 }
@@ -104,7 +104,10 @@ extension BLEDevicesVC {
                 }
                 
                 destinationVc.peripheralIndex = indexPath.row
-                self.navigationController?.pushViewController(destinationVc, animated: true)
+    
+                if (self.navigationController?.topViewController?.isKind(of: BLEDevicesVC.self))! {
+                    self.navigationController?.pushViewController(destinationVc, animated: true)
+                }
                 
             }).disposed(by: bag)
         

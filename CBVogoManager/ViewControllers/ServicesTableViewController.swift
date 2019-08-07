@@ -60,8 +60,9 @@ extension ServicesTableViewController {
                 
                 self.characteristicsVC.service = self.services.value[indexPath.row]
                 self.characteristicsVC.peripheralIndex = self.peripheralIndex
-                self.navigationController?.pushViewController(self.characteristicsVC, animated: true)
-                
+                if (self.navigationController?.topViewController?.isKind(of: ServicesTableViewController.self))! {
+                    self.navigationController?.pushViewController(self.characteristicsVC, animated: true)
+                }
             }).disposed(by: bag)
     }
 }

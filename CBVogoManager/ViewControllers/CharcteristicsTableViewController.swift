@@ -20,7 +20,7 @@ final class CharcteristicsTableViewController: RUITableViewController {
     
     //MARK: Fileprivate Member Declarations
     fileprivate let bag = DisposeBag()
-    fileprivate lazy var characteristicsVC = UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: CharacteristicViewController.self)) as! CharacteristicViewController
+//    fileprivate lazy var characteristicsVC = UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: CharacteristicViewController.self)) as! CharacteristicViewController
 
     //MARK: ViewLifeCycle Methods Implementations
     override func viewDidLoad() {
@@ -55,10 +55,17 @@ extension CharcteristicsTableViewController {
             .rx
             .itemSelected
             .subscribe(onNext:{ [unowned self] indexPath in
-                self.characteristicsVC.characteristic = charcteristics.value[indexPath.row]
-                self.characteristicsVC.peripheralIndex = self.peripheralIndex
-                self.navigationController?.pushViewController(self.characteristicsVC, animated: true)
+                guard indexPath.row < charcteristics.value.count else {
+                    print("invalid execution.")
+                    return
+                }
                 
+                let characteristicsVC = UIStoryboard.main.instantiateViewController(withIdentifier: String(describing: CharacteristicViewController.self)) as! CharacteristicViewController
+                characteristicsVC.characteristic = charcteristics.value[indexPath.row]
+                characteristicsVC.peripheralIndex = self.peripheralIndex
+                if (self.navigationController?.topViewController?.isKind(of: CharcteristicsTableViewController.self))! {
+                    self.navigationController?.pushViewController(characteristicsVC, animated: true)
+                }                
             }).disposed(by: bag)
     }
 }

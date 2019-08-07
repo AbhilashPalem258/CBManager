@@ -26,7 +26,7 @@ final class PeripheralViewController: RUIViewController {
     //MARK: fileprivate Member Declarations
     fileprivate let CBManagerInstance = CBManager.shared
     fileprivate let bag = DisposeBag()
-    fileprivate lazy var characteristicsVC = ServicesTableViewController.init(style: .plain)
+    fileprivate lazy var servicesVC = ServicesTableViewController.init(style: .plain)
     fileprivate var model: PeripheralModel!
     
     //MARK:  Member Declarations
@@ -34,8 +34,10 @@ final class PeripheralViewController: RUIViewController {
    
     //MARK: IBAction Methods Implementation
     @IBAction func servicesNavAction(_ sender: Any) {
-        characteristicsVC.peripheralIndex = peripheralIndex
-        self.navigationController?.pushViewController(characteristicsVC, animated: true)
+        servicesVC.peripheralIndex = peripheralIndex
+        if (self.navigationController?.topViewController?.isKind(of: PeripheralViewController.self))! {
+            self.navigationController?.pushViewController(servicesVC, animated: true)
+        }
     }
     
     //MARK: ViewLifeCycle Methods Implementation
@@ -45,11 +47,11 @@ final class PeripheralViewController: RUIViewController {
         guard let index = peripheralIndex, peripheralIndex! < CBManager.shared.peripherals.value.count  else {
             return
         }
-        
         model = CBManager.shared.peripherals.value[index]
-        
+        self.title = model.peripheral.name ?? AppConstants.display.unnamedService
         showPeripheralData()
         subscribeToCBManagerCallBacks()
+        self.showOrHideservicesButton()
     }
 }
 
@@ -108,10 +110,14 @@ extension PeripheralViewController {
                     return
                 }
                 
-                self.servicesButton.setTitle((self.model.peripheral.services?.count == 0 ? "No Services" : "Services"), for: .normal)
-                self.servicesButton.isEnabled = self.model.peripheral.services?.count == 0
-                self.servicesButton.isHidden = false
+                self.showOrHideservicesButton()
             })
             .disposed(by: bag)
+    }
+    
+    fileprivate func showOrHideservicesButton(){
+        self.servicesButton.setTitle((self.model.peripheral.services?.count == 0 ? "No Services" : "Services"), for: .normal)
+        self.servicesButton.isEnabled = self.model.peripheral.services?.count != 0
+        self.servicesButton.isHidden = model.peripheral.state == CBPeripheralState.disconnected
     }
 }

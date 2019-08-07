@@ -47,12 +47,14 @@ extension CBManager: CBManagementProtocol {
             return
         }
         
-        if !isOn {
-            peripherals.accept([])
-            manager.stopScan()
-        }
-        else{
-            manager.scanForPeripherals(withServices: nil, options: nil)
+        if manager.state == CBManagerState.poweredOn {
+            if !isOn {
+                peripherals.accept([])
+                manager.stopScan()
+            }
+            else{
+                manager.scanForPeripherals(withServices: nil, options: nil)
+            }
         }
     }
     
@@ -116,8 +118,9 @@ extension CBManager: CBCentralManagerDelegate {
         
         var devices = peripherals.value
         devices.append(peripheralObj)
-        peripherals.accept(devices)
-        
+        DispatchQueue.main.async {[unowned self]  in
+            self.peripherals.accept(devices)
+        }
     }
     
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
@@ -127,8 +130,9 @@ extension CBManager: CBCentralManagerDelegate {
         let connectedPeripheralmodel = peripherals.value.filter { (model) -> Bool in
             return model.peripheral.identifier.uuidString == peripheral.identifier.uuidString
         }.first
-    peripheral.discoverServices(connectedPeripheralmodel!.advertisementData[PeripheralVCConstants.string.kCBAdvDataServiceUUIDsKey] as? [CBUUID])
+        
         peripheral.delegate = self
+        peripheral.discoverServices(connectedPeripheralmodel!.advertisementData[PeripheralVCConstants.string.kCBAdvDataServiceUUIDsKey] as? [CBUUID])
     }
     
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
@@ -160,6 +164,11 @@ extension CBManager: CBPeripheralDelegate {
             let isSuceessful = (error == nil)
             DispatchQueue.main.async {[unowned self]  in
                 self.onReadData.onNext((isReadSuccessful: isSuceessful, characteristic: characteristic, readText: stringValue))
+            }
+        }
+        else {
+            DispatchQueue.main.async {[unowned self]  in
+                self.showAlertWithTitle(title: "Characteristic value is nil. please try again", message: nil)
             }
         }
     }

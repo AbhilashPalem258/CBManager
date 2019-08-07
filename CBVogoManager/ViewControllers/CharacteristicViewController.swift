@@ -50,6 +50,8 @@ final class CharacteristicViewController: UIViewController {
         self.title = AppConstants.VCTitles.characteristicVC
         setPropertiesLabel()
         subscribeForCBManagerCallBacks()
+        
+        self.view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(viewTapped)))
     }
 }
 
@@ -61,8 +63,11 @@ extension CharacteristicViewController {
         propertieslabel += characteristic!.properties.contains(CBCharacteristicProperties.read) ? ", isReadable" : ", Not Readable"
         self.characteristicPropertieslabel.text = propertieslabel
         
-        self.writeBtn.isEnabled = characteristic!.properties.contains(CBCharacteristicProperties.write)
-        self.readBtn.isEnabled = characteristic!.properties.contains(CBCharacteristicProperties.read)
+        self.writeBtn.isHidden = !characteristic!.properties.contains(CBCharacteristicProperties.write)
+        self.writeDataTF.isHidden = !characteristic!.properties.contains(CBCharacteristicProperties.write)
+
+        self.readBtn.isHidden = !characteristic!.properties.contains(CBCharacteristicProperties.read)
+        self.readLabel.isHidden = !characteristic!.properties.contains(CBCharacteristicProperties.read)
     }
     
     fileprivate func subscribeForCBManagerCallBacks() {
@@ -85,9 +90,13 @@ extension CharacteristicViewController {
                     UIAlertController.displayAlert(message: AppConstants.successMsgs.dataWrittenSuccessFulMsg, title: AppConstants.display.success, inViewController: self)
                 }
                 else {
-                    UIAlertController.displayAlert(message: AppConstants.errMsgs.failedToReadData, title: AppConstants.display.Error, inViewController: self)
+                    UIAlertController.displayAlert(message:error?.localizedDescription, title: AppConstants.display.Error, inViewController: self)
                 }
             })
             .disposed(by: bag)
+    }
+    
+    @objc fileprivate func viewTapped() {
+        self.view.endEditing(true)
     }
 }

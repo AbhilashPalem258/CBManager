@@ -26,8 +26,8 @@ struct AppConstants {
     }
     
     struct VCTitles {
-        static let serviceVC = "Services"
-        static let characteristicsVC = "Characteristics"
+        static let serviceVC = "Service UUIDS"
+        static let characteristicsVC = "Characteristic UUIDS"
         static let characteristicVC = "Play Around"
     }
 }
