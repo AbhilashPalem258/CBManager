@@ -11,3 +11,5 @@ Install pods in project using
 ```
 pod install
 ```
+
+Close the project if already opened. Open project through 'xcworkspace' file
